@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Sidebar } from "../../components/sidebar/";
 
 const API = "http://localhost:3001";
 
@@ -130,17 +131,32 @@ export default function ProdutoForm() {
   }
 
   return (
-    <>
-      <style>{`
+    <div className="pf-wrapper">
+      <Sidebar />
+      <>
+        <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
+        .pf-wrapper {
+          display: flex;
+          width: 100%;
+          height: 100vh;
+          overflow: hidden;
+        }
+
         .pf-page {
-          min-height: 100vh;
+          flex: 1;
+          height: 100vh;
+          overflow-y: auto;
           background: #F5F5F5;
           font-family: 'Poppins', sans-serif;
           padding: 32px;
         }
+
+        .pf-page::-webkit-scrollbar { width: 6px; }
+        .pf-page::-webkit-scrollbar-track { background: transparent; }
+        .pf-page::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
 
         /* ── Header ── */
         .pf-header {
@@ -308,10 +324,30 @@ export default function ProdutoForm() {
         .toast-dot.ok  { background: #FFD100; }
         .toast-dot.err { background: #FF4500; }
 
+        @media (max-width: 900px) {
+          .pf-page { padding: 16px 16px 16px 16px; padding-top: 72px; }
+          .pf-grid, .pf-grid.cols-3 { grid-template-columns: 1fr 1fr; }
+        }
+
         @media (max-width: 600px) {
-          .pf-page { padding: 16px; }
+          .pf-page { padding: 12px; }
           .pf-grid, .pf-grid.cols-3 { grid-template-columns: 1fr; }
           .pf-full { grid-column: 1; }
+          .pf-header { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 20px; }
+          .pf-title-block h1 { font-size: 18px; }
+          .pf-title-block p { font-size: 12px; }
+          .pf-card { border-radius: 12px; }
+          .pf-form { padding: 20px 16px; }
+          .pf-footer { padding: 16px; flex-direction: column-reverse; }
+          .pf-footer-right { width: 100%; }
+          .pf-footer-right .btn, .pf-footer .btn-ghost { width: 100%; justify-content: center; }
+          .pf-back span { display: none; }
+          .confirm-box { padding: 24px 16px; }
+        }
+
+        @media (max-width: 400px) {
+          .pf-page { padding: 8px; }
+          .pf-card-header { padding: 16px; }
         }
       `}</style>
 
@@ -475,5 +511,6 @@ export default function ProdutoForm() {
         <span>{toast.msg}</span>
       </div>
     </>
+    </div>
   );
 }

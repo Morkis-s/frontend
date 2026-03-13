@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     display: flex;
     justify-content: center;
@@ -7,36 +12,37 @@ body {
     font-family: "Inter", sans-serif;
     margin: 0;
     padding: 0;
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
-    overflow: hidden;
 }
+
+/* ── Layout principal ── */
 .container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
     margin: 0;
     padding: 0;
 }
+
+/* ── Lado esquerdo (branding) ── */
 .primary-container {
     display: flex;
-    width: 50%;
-    height: 100%;
-    align-items: center;
-    justify-content: flex-start;
     flex-direction: column;
-    padding-left: 48px;
-    padding-top: 20px;
+    justify-content: center;
+    align-items: flex-start;
+    width: 60%;
+    min-height: 100vh;
+    padding: 48px 56px;
 }
 
 .logo-branding {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 16px;
-    align-self: flex-start;
+    margin-bottom: 40px;
 }
 
 .logo-icon {
@@ -60,115 +66,174 @@ body {
 }
 
 .primary-container h1 {
-    font-size: 32px;
+    font-size: 36px;
+    font-weight: 700;
     margin: 0 0 16px 0;
-    align-self: flex-start;
+    line-height: 1.2;
+    color: #1A1A1A;
 }
 
 .primary-container p {
+    font-size: 15px;
     text-align: left;
-    line-height: 1.6;
+    line-height: 1.7;
     color: #555;
-    margin: 0 100px 0 0;
+    margin: 0;
+    max-width: 380px;
 }
 
+/* ── Lado direito (formulário) ── */
 .login-container {
-    background-color: whitesmoke;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 32px 28px;
-    border-radius: 20px;
-    max-width: 420px;
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-right: 30px;
-    padding-left: 30px;
-    flex: 0 1 auto;
+    justify-content: center;
+    width: 50%;
+    min-height: 100vh;
+   
 }
-.login-container h2, .login-container p {
-    margin: 0 0 6px 0;
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 360px;
+}
+
+.login-container h2 {
     font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+    color: #1A1A1A;
     align-self: flex-start;
 }
-.login-container p {
-    margin: 0 0 10px 0;
-    font-size: 13px;
-    color: black;
-}
-.content {
-    width: 80%;
-    height: 50%;
-}
-.button {
-    width: 100%;
-    display: flex;
-    margin-top: 25px;
-    padding: 0px 25%;
-    height: 34px;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-.label {
-    margin-top: 15px;
+
+.login-container > p {
     font-size: 14px;
+    color: #666;
+    margin: 0 0 20px 0;
+    align-self: flex-start;
+}
+
+/* sobrescreve o .content genérico */
+.content {
+    width: 100%;
+    height: auto;
+}
+
+/* ── Labels e inputs ── */
+.label {
+    margin-top: 16px;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 600;
     width: 100%;
     text-align: left;
-    font-weight: 600;
+    color: #333;
 }
-Input::placeholder {
-    color: black;
+
+input::placeholder {
+    color: #aaa;
     font-weight: 300;
     font-size: 14px;
 }
+
+/* ── Botão ── */
+.button {
+    width: 100%;
+    margin-top: 24px;
+    height: 44px;
+    font-size: 15px;
+    font-weight: 600;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+/* ── Link de cadastro ── */
 span {
-    margin-top: 8px;
+    margin-top: 16px;
     font-weight: 400;
     font-size: 14px;
+    color: #555;
+    align-self: center;
 }
+
 span a {
     color: var(--primary);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
 }
 
-/* ── Responsivo ── */
+span a:hover {
+    text-decoration: underline;
+}
+
+/* ── Responsivo — tablet ── */
 @media (max-width: 900px) {
     body {
-        overflow-y: auto;
-        height: auto;
-        min-height: 100vh;
         align-items: flex-start;
     }
+
     .container {
         flex-direction: column;
         align-items: stretch;
-        height: auto;
-        min-height: 100vh;
-        padding: 0;
     }
+
     .primary-container {
         width: 100%;
-        height: auto;
-        padding: 40px 32px 24px;
+        min-height: auto;
+        padding: 40px 28px 32px;
+        justify-content: flex-start;
     }
+
+    .primary-container h1 {
+        font-size: 28px;
+    }
+
     .primary-container p {
-        margin: 0;
-    }
-    .content {
-        width: 100%;
-        height: auto;
-    }
-    .login-container {
+        font-size: 14px;
         max-width: 100%;
-        border-radius: 0;
-        border-left: none;
-        border-right: none;
-        border-bottom: none;
-        padding: 32px;
-        flex: 1;
     }
+
+    .logo-branding {
+        margin-bottom: 24px;
+    }
+
+    .login-container {
+        width: 100%;
+        min-height: auto;
+        padding: 32px 28px 48px;
+        border-left: none;
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        justify-content: flex-start;
+    }
+
+    .login-form {
+        max-width: 100%;
+    }
+}
+
+/* ── Responsivo — mobile ── */
+@media (max-width: 480px) {
+    .primary-container {
+        padding: 28px 20px 24px;
+    }
+
+    .primary-container h1 {
+        font-size: 22px;
+    }
+
+    .login-container {
+        padding: 28px 20px 40px;
+    }
+
+    .login-container h2 {
+        font-size: 20px;
+    }
+
     .button {
-        padding: 0;
+        height: 48px;
+        font-size: 16px;
     }
 }

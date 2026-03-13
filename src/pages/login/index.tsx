@@ -75,7 +75,7 @@ export function Login() {
   return (
     <>
       <div className="container">
-        <div className="content primary-container">
+        <div className="primary-container">
           <div className="logo-branding">
             <div className="logo-icon">T</div>
             <div className="logo-text">Tool-Master</div>
@@ -86,51 +86,53 @@ export function Login() {
           </p>
         </div>
 
-        <div className="content login-container">
-          <h2>Bem-vindo de volta</h2>
-          <p>Faça o login para continuar sua experiência.</p>
+        <div className="login-container">
+          <div className="login-form">
+            <h2>Bem-vindo de volta</h2>
+            <p>Faça o login para continuar sua experiência.</p>
 
-          <div className="label">
-            <label>Usuário</label>
+            <div className="label">
+              <label>Usuário</label>
+            </div>
+            <Input
+              type="text"
+              placeholder="Usuário"
+              value={usuario}
+              onChange={(e) => setUsuario(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleLogin()}
+            />
+
+            <div className="label">
+              <label>Senha</label>
+            </div>
+            <Input
+              type="password"
+              placeholder="Digite sua senha"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleLogin()}
+            />
+
+            {erro && (
+              <p style={{
+                color: "red",
+                fontSize: "13px",
+                marginTop: "8px",
+                alignSelf: "flex-start",
+                width: "100%"
+              }}>
+                ⚠️ {erro}
+              </p>
+            )}
+
+            <Button type="button" onClick={handleLogin} disabled={carregando}>
+              {carregando ? "Entrando..." : "Entrar"}
+            </Button>
+
+            <span>
+              Ainda não tem conta? <a href="/sign-up">Criar conta</a>
+            </span>
           </div>
-          <Input
-            type="text"
-            placeholder="Usuário"
-            value={usuario}
-            onChange={(e) => setUsuario(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleLogin()}
-          />
-
-          <div className="label">
-            <label>Senha</label>
-          </div>
-          <Input
-            type="password"
-            placeholder="Digite sua senha"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleLogin()}
-          />
-
-          {erro && (
-            <p style={{
-              color: "red",
-              fontSize: "13px",
-              marginTop: "8px",
-              alignSelf: "flex-start",
-              width: "100%"
-            }}>
-              ⚠️ {erro}
-            </p>
-          )}
-
-          <Button type="button" onClick={handleLogin} disabled={carregando}>
-            {carregando ? "Entrando..." : "Entrar"}
-          </Button>
-
-          <span>
-            Ainda não tem conta? <a href="/sign-up">Criar conta</a>
-          </span>
         </div>
       </div>
     </>

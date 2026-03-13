@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Sidebar } from "../components/sidebar/";
 
 const API = "http://localhost:3001";
 
@@ -138,10 +139,11 @@ export default function Produtos() {
   const confirmProduto = produtos.find(p => p.id === confirmId);
 
   return (
-    <>
+    <div className="produtos-wrapper">
       <style>{`
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        .produtos-page { display:flex;flex-direction:column;height:100%;background:var(--bg,#F5F5F5);font-family:'Poppins',sans-serif; }
+        .produtos-wrapper { display:flex;width:100%;height:100vh;overflow:hidden; }
+        .produtos-page { display:flex;flex-direction:column;flex:1;height:100vh;overflow:hidden;background:var(--bg,#F5F5F5);font-family:'Poppins',sans-serif; }
         .p-topbar { background:#fff;border-bottom:1px solid rgba(0,0,0,.09);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0; }
         .p-topbar-title { font-size:18px;font-weight:700;display:flex;align-items:center;gap:10px; }
         .p-topbar-title span { background:var(--primary,#FFD100);color:#000;font-size:10px;font-weight:700;letter-spacing:.8px;padding:3px 8px;border-radius:20px;text-transform:uppercase; }
@@ -190,8 +192,38 @@ export default function Produtos() {
         .toast.show{transform:translateY(0);opacity:1}
         .toast-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}.toast-dot.ok{background:#FFD100}.toast-dot.err{background:#FF4500}
         .p-content::-webkit-scrollbar{width:6px}.p-content::-webkit-scrollbar-track{background:transparent}.p-content::-webkit-scrollbar-thumb{background:#ddd;border-radius:3px}
+
+        @media (max-width: 900px) {
+          .p-topbar{padding:0 16px 0 64px;height:56px;}
+          .p-topbar-title{font-size:15px;}
+          .p-content{padding:16px;}
+          .stats-row{grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px;}
+          .stat-card{padding:14px;gap:10px;}
+          .stat-icon{width:36px;height:36px;font-size:16px;}
+          .stat-info strong{font-size:18px;}
+          .table-header{padding:14px 16px;}
+          thead th,tbody td{padding:10px 14px;}
+        }
+
+        @media (max-width: 600px) {
+          .p-topbar-title span{display:none;}
+          .p-topbar-actions .btn-ghost{display:none;}
+          .stats-row{grid-template-columns:repeat(2,1fr);}
+          .stat-info strong{font-size:16px;}
+          .search-bar input{width:120px;}
+          .table-card{border-radius:10px;overflow-x:auto;}
+          table{min-width:620px;}
+          .p-content{padding:12px;}
+        }
+
+        @media (max-width: 400px) {
+          .stats-row{grid-template-columns:1fr 1fr;}
+          .p-topbar{padding:0 12px;}
+          .p-content{padding:10px;}
+        }
       `}</style>
 
+      <Sidebar />
       <div className="produtos-page">
         <header className="p-topbar">
           <div className="p-topbar-title">Produtos <span>Vitrine</span></div>
@@ -290,6 +322,6 @@ export default function Produtos() {
         <span className={`toast-dot ${toast.type}`} />
         <span>{toast.msg}</span>
       </div>
-    </>
+    </div>
   );
 }
